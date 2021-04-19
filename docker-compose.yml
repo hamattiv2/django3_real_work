@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - ./back:/app/
+    tty: true
+    stdin_open: true
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: django
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password09876
+      MYSQL_ALLOW_EMPTY_PASSWORD: ‘yes’
+    volumes: 
+      - ./db:/var/lib/mysql
+    ports: 
+      - 3306:3306
+
+volumes:
+  node-modules-volume:
