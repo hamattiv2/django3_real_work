@@ -17,13 +17,14 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: django
-      MYSQL_USER: root
-      MYSQL_PASSWORD: password09876
-      MYSQL_ALLOW_EMPTY_PASSWORD: ‘yes’
+      MYSQL_USER: django_user
+      MYSQL_PASSWORD: password
+      MYSQL_TCP_PORT: 3306
+      MYSQL_ROOT_PASSWORD: password
     volumes: 
       - ./db:/var/lib/mysql
     ports: 
-      - 3306:3306
+      - 33306:3306
 
 volumes:
   node-modules-volume:
