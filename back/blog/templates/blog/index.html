@@ -1,0 +1,31 @@
+{% extends 'config/base.html' %}
+
+{% block content %}
+
+<main class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h3 class="pb-4 font-italic border-bottom">
+                {{ title }}
+            </h3>
+            {% for article in page_obj %}
+            <div class="blog-post">
+                <a href="{% url 'article_detail' article.id %}">
+                    <h2 class="blog-post-title">{{ article.title }}</h2>
+                </a>
+                <p class="blog-post-meta">{{ article.insert_dttm }} by
+                    <a href="#">{{ article.author }}</a>
+                </p>
+            </div>
+            <hr>
+            {% endfor %}
+
+            
+        </div>
+        {% include 'config/snipetts/sidebar.html' %}
+    </div>
+</main>
+
+{% include 'config/snipetts/pagination.html' %}
+
+{% endblock %}

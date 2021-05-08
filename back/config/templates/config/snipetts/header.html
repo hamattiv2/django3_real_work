@@ -1,0 +1,33 @@
+
+
+<div class="container">
+    <header class="py-3">
+        <div class="row flex-nowrap justify-content-center align-item-center">
+            <div class="col-4 text-center">
+                <h1 class="display-5 font-italic">
+                    <a href="{% url 'index' %}" class="text-dark text-decoration-none">
+                        Djangoポートフォリオ
+                    </a>
+                </h1>
+            </div>
+        </div>
+    </header>
+    <div class="py-1 mb-2">
+        <nav class="nav d-flex justify-content-between">
+            <a class="p-2 link-secondary" href="{% url 'articles' %}">ブログ</a>
+            <a class="p-2 link-secondary" href="{% url 'contact' %}">お問い合わせ</a>
+            <a class="p-2 link-secondary" href="{% url 'donate' %}">寄付</a>
+            {% if user.is_authenticated %}
+            <div>
+                <a class="p-2" href="{% url 'mypage' %}">マイページ</a>
+                <a class="p-2" href="{% url 'logout' %}">ログアウト</a>
+            </div>
+            {% else %}
+            <div>
+                <a href="{% url 'login' %}">ログイン</a>
+                <a href="{% url 'signup' %}">新規登録</a>
+            </div>
+            {% endif %}
+        </nav>
+    </div>
+</div>

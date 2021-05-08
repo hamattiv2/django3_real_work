@@ -1,0 +1,83 @@
+{% extends 'config/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="p-4 p-md-5 mb-4 rounded bg-warning">
+        <div class="col-md-6 px-0">
+            <h1 class="display-4 font-italic">Django</h1>
+            <p class="lead my-3">ようこそ</p>
+            <!-- <p class="lead mb-0">
+                <a href="#" class="font-weight-bold">続きを読む</a>
+            </p> -->
+        </div>
+    </div>
+    <div class="row mb-2">
+        <h3 class="pb-4 font-italic border-bottom">
+            人気の記事
+        </h3>
+        {% for rank in ranks %}
+        <div class="col-md-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row 
+            mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-primary">{{ rank.title }}</strong>
+                    <div class="mb-1 text-muted">{{ rank.insert_dttm }} </div>
+                    <p class="card-text mb-auto">{{ rank.text }}</p>
+                    <a href="{% url 'article_detail' rank.id %}" class="stretched-link">続きを読む</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<main class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h3 class="pb-4 font-italic border-bottom">
+                ブログ記事
+            </h3>
+            {% for article in articles %}
+            <div class="blog-post">
+                <a href="{% url 'article_detail' article.id %}">
+                    <h2 class="blog-post-title">{{ article.title }}</h2>
+                </a>
+                <p class="blog-post-meta">{{ article.insert_dttm }} by
+                    <a href="#">{{ article.author }}</a>
+                </p>
+            </div>
+            <hr>
+            {% endfor %}
+
+            <nav class="blog-pagination">
+                <a class="btn btn-outline-primary" href="{% url 'articles' %}">ブログ一覧はこちら</a>
+                <!-- <a class="btn btn-outline-primary disabled" href="#">新しい記事</a> -->
+            </nav>
+        </div>
+        {% include 'config/snipetts/sidebar.html' %}
+    </div>
+</main>
+
+<div class="container mt-5">
+    <div class="row">
+        <nav class="blog-pagination">
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a class="btn btn-outline-primary" href="?page=1">&laquo; 最初</a>
+                        <a class="btn btn-outline-primary" href="?page={{ page_obj.previous_page_number }}">戻る</a>
+                    {% endif %}
+            
+                    {% if page_obj.has_next %}
+                        <a class="btn btn-outline-primary" href="?page={{ page_obj.next_page_number }}">次へ</a>
+                        <a class="btn btn-outline-primary" href="?page={{ page_obj.paginator.num_pages }}">最後 &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        </nav>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+<div class="container mt-5">
+    <div class="row">
+        <nav class="blog-pagination">
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a class="btn btn-outline-primary" href="?page=1">&laquo; 最初</a>
+                        <a class="btn btn-outline-primary" href="?page={{ page_obj.previous_page_number }}">戻る</a>
+                    {% endif %}
+            
+                    {% if page_obj.has_next %}
+                        <a class="btn btn-outline-primary" href="?page={{ page_obj.next_page_number }}">次へ</a>
+                        <a class="btn btn-outline-primary" href="?page={{ page_obj.paginator.num_pages }}">最後 &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        </nav>
+    </div>
+</div>

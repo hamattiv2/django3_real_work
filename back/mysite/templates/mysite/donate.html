@@ -1,0 +1,69 @@
+{% extends 'config/base.html' %}
+
+{% block content %}
+
+
+<main class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h3 class="pb-4 font-italic border-bottom">
+                寄付<span class="small">(デモ)</span>
+            </h3>
+
+            <form action="{% url 'donate' %}" method="post">
+                {% csrf_token %}
+
+                <div class="form-group col-12">
+                    <label class="form-label">寄付金</label>
+                    <select name="amount" class="form-control" required>
+                        <option value="100">100円</option>
+                        <option value="500">500円</option>
+                        <option value="1000">1,000円</option>
+                        <option value="5000">5,000円</option>
+                        <option value="10000">10,000円</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-12 mt-3">
+                    <label class="form-label">メールアドレス</label>
+                    <input type="email" name="email" class="form-control" required>
+                </div>
+
+                <br>
+
+                <script type="text/javascript"
+                    src="https://checkout.pay.jp"
+                    class="payjp-button"
+                    data-key="{{ public_key }}">
+                </script>
+            </form>
+            
+            <br>
+
+            <h4>決済情報<span class="small">(デモ)</span></h4>
+            <table class="table">
+                <tr>
+                    <th>カード番号</th>
+                    <td>4242424242424242</td>
+                </tr>
+                <tr>
+                    <th>有効期限</th>
+                    <td>12/22</td>
+                </tr>
+                <tr>
+                    <th>CVC</th>
+                    <td>123</td>
+                </tr>
+                <tr>
+                    <th>カード名義</th>
+                    <td>YUI ARAGAKI</td>
+                </tr>
+            </table>
+
+
+        </div>
+        {% include 'config/snipetts/sidebar.html' %}
+    </div>
+</main>
+
+{% endblock %}

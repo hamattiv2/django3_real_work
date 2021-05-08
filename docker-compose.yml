@@ -12,6 +12,20 @@ services:
     tty: true
     stdin_open: true
 
+  liver:
+    container_name: liver
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    command: python manage.py livereload --host=0.0.0.0 --port=8080
+    restart: on-failure
+    volumes:
+      - ./back:/app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - web
+
   db:
     image: mysql:5.7
     restart: always
@@ -21,8 +35,10 @@ services:
       MYSQL_PASSWORD: password
       MYSQL_TCP_PORT: 3306
       MYSQL_ROOT_PASSWORD: password
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes: 
       - ./db:/var/lib/mysql
+      - ./db/my.cnf:/etc/mysql/my.cnf
     ports: 
       - 33306:3306
 
