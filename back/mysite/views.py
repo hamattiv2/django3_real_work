@@ -25,11 +25,14 @@ def loginview(request):
 
     if request.method == 'POST':
         user = authenticate(request, email=request.POST['email'], password=request.POST['password'])
+        print(user)
         if user:
             login(request, user)
             return redirect('index')
         else:
+            print('aaa ')
             context['error_messages'] = 'メールアドレスかパスワードが誤っています'
+            return render(request, 'mysite/register/login.html', context)
     else:
         if request.user.is_authenticated:
             return render(request, 'mysite/index.html', context)
@@ -61,6 +64,7 @@ def signupview(request):
 
 @login_required
 def mypageview(request):
+    print(dir(request.user))
     context = {
             'form': ProfileForm(instance=request.user.profile)
         }

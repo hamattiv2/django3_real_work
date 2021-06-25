@@ -3,3 +3,4 @@ mysqlclient==1.4.6
 django-livereload-server
 PyYAML
 payjp
+django-environ

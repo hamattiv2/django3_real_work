@@ -8,7 +8,7 @@ def article_list(request):
     page_number = request.GET.get('page')
     context = {
         'title': 'ブログ一覧',
-        'page_obj': Paginator(Article.objects.all(), 2).get_page(page_number),
+        'page_obj': Paginator(Article.objects.all(), 1).get_page(page_number),
         'page_number': page_number
     }
     return render(request, 'blog/index.html', context)

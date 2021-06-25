@@ -26,6 +26,10 @@ class ProfileForm(forms.ModelForm):
         fields = ['username', 'zipcode', 'prefecture', 'city', 'address']
 
     def __init__(self, *args, **kwargs):
+        print('-----')
+        print(args)
+        print(kwargs)
+        print('----')
         super().__init__(*args, **kwargs)
         print(self.fields)
         for field in self.fields.values():
